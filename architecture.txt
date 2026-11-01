@@ -1,0 +1,15 @@
+┌──────────────┐   N workers (asyncio)   ┌───────────────────┐
+│  CLI argparse│ ──────────────────────▶ │ aiohttp Session   │ ──▶ Cible HTTP
+└──────────────┘                         │ (pool keep-alive) │
+        │                                └───────────────────┘
+        ▼                                         │
+┌──────────────┐   latences, codes, erreurs        │
+│ Stats        │ ◀─────────────────────────────────┘
+│ - array('d') │  (toutes les latences, rapport final)
+│ - deque(5000)│  (fenêtre glissante, percentiles live)
+└──────────────┘
+        │
+        ▼
+┌──────────────┐
+│ Dashboard    │  rich.Live, rafraîchi 8 fois/s
+└──────────────┘
